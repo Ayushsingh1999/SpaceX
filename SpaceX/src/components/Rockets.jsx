@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import services from "../services/api_services";
+import Loader from "./Loader";
 
 
 const Rockets = () => {
@@ -19,12 +20,9 @@ const Rockets = () => {
 
     console.log("data",rocket)
 
-    if(loading)
-    {
-        <div>loading....</div>
-    }
     return (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        loading?<Loader/>:(
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {rocket.slice(0,3).map((rock) => (
             <div key={rock.rocket_id} className="bg-gray-800 bg-opacity-60 text-white p-4 rounded h-96">
               <h2 className="text-xl font-bold mt-2 pb-4">{rock.rocket_name}</h2>
@@ -39,6 +37,7 @@ const Rockets = () => {
             </div>
           ))}
         </div>
+        )
       );
 };
 
